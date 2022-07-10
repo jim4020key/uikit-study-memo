@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -132,11 +133,64 @@
                             <outlet property="delegate" destination="6u5-qM-zg9" id="tOY-42-Kny"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="목록" id="HMG-J3-dfH"/>
+                    <navigationItem key="navigationItem" title="목록" id="HMG-J3-dfH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eWA-au-lpZ">
+                            <connections>
+                                <segue destination="5gp-8x-fHx" kind="show" id="7fo-Wk-iI8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbn-UK-rNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-408.69565217391306" y="-60.267857142857139"/>
+        </scene>
+        <!--메모 작성-->
+        <scene sceneID="fyI-ab-5ss">
+            <objects>
+                <viewController id="5gp-8x-fHx" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="haf-oC-u7M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z5o-tn-7ma">
+                                <rect key="frame" x="16" y="108" width="382" height="250"/>
+                                <color key="backgroundColor" white="0.88254676870748294" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="FfF-lM-fjo"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
+                            </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zaO-uX-4kp">
+                                <rect key="frame" x="16" y="373" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="dHm-gx-TKP"/>
+                                    <constraint firstAttribute="height" constant="250" id="flr-hI-0L4"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oHE-aB-Mpa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oHE-aB-Mpa" firstAttribute="trailing" secondItem="z5o-tn-7ma" secondAttribute="trailing" constant="16" id="UbH-vE-4je"/>
+                            <constraint firstItem="zaO-uX-4kp" firstAttribute="top" secondItem="z5o-tn-7ma" secondAttribute="bottom" constant="15" id="WAr-wV-UeD"/>
+                            <constraint firstItem="z5o-tn-7ma" firstAttribute="leading" secondItem="oHE-aB-Mpa" secondAttribute="leading" constant="16" id="cwc-Eo-Qch"/>
+                            <constraint firstItem="z5o-tn-7ma" firstAttribute="top" secondItem="oHE-aB-Mpa" secondAttribute="top" constant="20" id="r4t-0N-eFi"/>
+                            <constraint firstItem="zaO-uX-4kp" firstAttribute="leading" secondItem="oHE-aB-Mpa" secondAttribute="leading" constant="16" id="rd7-p4-50D"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="메모 작성" id="tgN-Re-Ofr">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="camera" id="HVs-el-94O"/>
+                            <barButtonItem title="저장" id="Wn3-JP-uHN"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="omB-W8-t68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="356.52173913043481" y="-60.267857142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="I9T-Yl-P8K">
@@ -156,6 +210,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
