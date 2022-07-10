@@ -236,10 +236,22 @@
                     </view>
                     <navigationItem key="navigationItem" title="메모 작성" id="tgN-Re-Ofr">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="camera" id="HVs-el-94O"/>
-                            <barButtonItem title="저장" id="Wn3-JP-uHN"/>
+                            <barButtonItem systemItem="camera" id="HVs-el-94O">
+                                <connections>
+                                    <action selector="pick:" destination="5gp-8x-fHx" id="qM9-Lh-kDq"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="저장" id="Wn3-JP-uHN">
+                                <connections>
+                                    <action selector="save:" destination="5gp-8x-fHx" id="ja5-Jm-Dot"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contents" destination="z5o-tn-7ma" id="Pgq-sQ-mcL"/>
+                        <outlet property="preview" destination="zaO-uX-4kp" id="vzR-IW-Eph"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omB-W8-t68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
