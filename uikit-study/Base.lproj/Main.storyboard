@@ -19,7 +19,18 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="udr-cx-cmh">
                             <rect key="frame" x="0.0" y="227" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RF-u0-Bbs" customClass="CSLogButton" customModule="uikit_study" customModuleProvider="target">
+                                    <rect key="frame" x="187.5" y="7" width="39" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="더보기"/>
+                                </button>
+                            </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="5RF-u0-Bbs" firstAttribute="centerY" secondItem="udr-cx-cmh" secondAttribute="centerY" id="8Na-x5-DF3"/>
+                                <constraint firstItem="5RF-u0-Bbs" firstAttribute="centerX" secondItem="udr-cx-cmh" secondAttribute="centerX" id="9av-kb-5Zv"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="memoCell" rowHeight="80" id="C4S-bI-m86" customClass="MemoCell" customModule="uikit_study" customModuleProvider="target">
