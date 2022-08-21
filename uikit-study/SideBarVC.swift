@@ -71,4 +71,13 @@ class SideBarVC: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MemoForm")
+            let target = self.revealViewController().frontViewController as! UINavigationController
+            target.pushViewController(vc!, animated: true)
+            self.revealViewController().revealToggle(self)
+        }
+    }
 }
