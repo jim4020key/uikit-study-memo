@@ -78,6 +78,12 @@ class SideBarVC: UITableViewController {
             let target = self.revealViewController().frontViewController as! UINavigationController
             target.pushViewController(vc!, animated: true)
             self.revealViewController().revealToggle(self)
+        } else if indexPath.row == 5 {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "_Profile")
+            vc?.modalPresentationStyle = .fullScreen
+            self.present(vc!, animated: true) {
+                self.revealViewController().revealToggle(self)
+            }
         }
     }
 }
