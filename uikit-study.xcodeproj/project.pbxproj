@@ -28,6 +28,7 @@
 		4D966F8A28B28AB400A435CD /* account@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D966F8128B28AB400A435CD /* account@2x.jpg */; };
 		4D966F8B28B28AB400A435CD /* icon05.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D966F8228B28AB400A435CD /* icon05.png */; };
 		4D966F9228B28D8D00A435CD /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D966F9028B28D8D00A435CD /* SWRevealViewController.m */; };
+		4D966F9528B28F5400A435CD /* SideBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D966F9428B28F5400A435CD /* SideBarVC.swift */; };
 		4DCD4BFA28AD4C9400FBAD01 /* CSLogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD4BF928AD4C9400FBAD01 /* CSLogButton.swift */; };
 		4DCD4BFF28AD4D4800FBAD01 /* memo-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD4BFC28AD4D4700FBAD01 /* memo-background@2x.png */; };
 		4DCD4C0028AD4D4800FBAD01 /* button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD4BFD28AD4D4700FBAD01 /* button-bg.png */; };
@@ -60,6 +61,7 @@
 		4D966F9028B28D8D00A435CD /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		4D966F9128B28D8D00A435CD /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		4D966F9328B28DFB00A435CD /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		4D966F9428B28F5400A435CD /* SideBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarVC.swift; sourceTree = "<group>"; };
 		4DCD4BF928AD4C9400FBAD01 /* CSLogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSLogButton.swift; sourceTree = "<group>"; };
 		4DCD4BFC28AD4D4700FBAD01 /* memo-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memo-background@2x.png"; sourceTree = "<group>"; };
 		4DCD4BFD28AD4D4700FBAD01 /* button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-bg.png"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				4D1F1846287B284B00A132E9 /* MemoCell.swift */,
 				4D1F1848287B293300A132E9 /* MemoData.swift */,
 				4DCD4BF928AD4C9400FBAD01 /* CSLogButton.swift */,
+				4D966F9428B28F5400A435CD /* SideBarVC.swift */,
 				4D966F9328B28DFB00A435CD /* Bridging-Header.h */,
 			);
 			path = "uikit-study";
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DCD4BFA28AD4C9400FBAD01 /* CSLogButton.swift in Sources */,
+				4D966F9528B28F5400A435CD /* SideBarVC.swift in Sources */,
 				4D1F1847287B284B00A132E9 /* MemoCell.swift in Sources */,
 				4D1F1849287B293300A132E9 /* MemoData.swift in Sources */,
 				4D397AB62871E43F008983C1 /* AppDelegate.swift in Sources */,
