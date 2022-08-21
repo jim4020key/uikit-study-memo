@@ -27,7 +27,7 @@
 		4D966F8928B28AB400A435CD /* icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D966F8028B28AB400A435CD /* icon01.png */; };
 		4D966F8A28B28AB400A435CD /* account@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D966F8128B28AB400A435CD /* account@2x.jpg */; };
 		4D966F8B28B28AB400A435CD /* icon05.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D966F8228B28AB400A435CD /* icon05.png */; };
-		4D966F8F28B28B6100A435CD /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D966F8E28B28B6100A435CD /* SWRevealViewController.m */; };
+		4D966F9228B28D8D00A435CD /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D966F9028B28D8D00A435CD /* SWRevealViewController.m */; };
 		4DCD4BFA28AD4C9400FBAD01 /* CSLogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD4BF928AD4C9400FBAD01 /* CSLogButton.swift */; };
 		4DCD4BFF28AD4D4800FBAD01 /* memo-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD4BFC28AD4D4700FBAD01 /* memo-background@2x.png */; };
 		4DCD4C0028AD4D4800FBAD01 /* button-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD4BFD28AD4D4700FBAD01 /* button-bg.png */; };
@@ -57,9 +57,9 @@
 		4D966F8028B28AB400A435CD /* icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon01.png; sourceTree = "<group>"; };
 		4D966F8128B28AB400A435CD /* account@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account@2x.jpg"; sourceTree = "<group>"; };
 		4D966F8228B28AB400A435CD /* icon05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon05.png; sourceTree = "<group>"; };
-		4D966F8C28B28B6000A435CD /* uikit-study-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "uikit-study-Bridging-Header.h"; sourceTree = "<group>"; };
-		4D966F8D28B28B6100A435CD /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		4D966F8E28B28B6100A435CD /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		4D966F9028B28D8D00A435CD /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		4D966F9128B28D8D00A435CD /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		4D966F9328B28DFB00A435CD /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		4DCD4BF928AD4C9400FBAD01 /* CSLogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSLogButton.swift; sourceTree = "<group>"; };
 		4DCD4BFC28AD4D4700FBAD01 /* memo-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memo-background@2x.png"; sourceTree = "<group>"; };
 		4DCD4BFD28AD4D4700FBAD01 /* button-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-bg.png"; sourceTree = "<group>"; };
@@ -97,8 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				4DCD4BFB28AD4D3B00FBAD01 /* Resources */,
-				4D966F8D28B28B6100A435CD /* SWRevealViewController.h */,
-				4D966F8E28B28B6100A435CD /* SWRevealViewController.m */,
+				4D966F9128B28D8D00A435CD /* SWRevealViewController.h */,
+				4D966F9028B28D8D00A435CD /* SWRevealViewController.m */,
 				4D397AB52871E43F008983C1 /* AppDelegate.swift */,
 				4D397AB72871E43F008983C1 /* SceneDelegate.swift */,
 				4D397ABB2871E43F008983C1 /* Main.storyboard */,
@@ -112,7 +112,7 @@
 				4D1F1846287B284B00A132E9 /* MemoCell.swift */,
 				4D1F1848287B293300A132E9 /* MemoData.swift */,
 				4DCD4BF928AD4C9400FBAD01 /* CSLogButton.swift */,
-				4D966F8C28B28B6000A435CD /* uikit-study-Bridging-Header.h */,
+				4D966F9328B28DFB00A435CD /* Bridging-Header.h */,
 			);
 			path = "uikit-study";
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 				4D1F1843287B27F600A132E9 /* MemoFormVC.swift in Sources */,
 				4D1F1845287B280600A132E9 /* MemoReadVC.swift in Sources */,
 				4D397AC02871E43F008983C1 /* uikit_study.xcdatamodeld in Sources */,
-				4D966F8F28B28B6100A435CD /* SWRevealViewController.m in Sources */,
+				4D966F9228B28D8D00A435CD /* SWRevealViewController.m in Sources */,
 				4D1F1841287B27DB00A132E9 /* MemoListVC.swift in Sources */,
 				4D397AB82871E43F008983C1 /* SceneDelegate.swift in Sources */,
 			);
@@ -396,7 +396,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.green.uikit-study";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "uikit-study/Resources/uikit-study-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "uikit-study/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -430,7 +430,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.green.uikit-study";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "uikit-study/Resources/uikit-study-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "uikit-study/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
