@@ -9,6 +9,7 @@ import UIKit
 
 class MemoListVC: UITableViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    lazy var dao = MemoDAO()
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.appDelegate.memoList.count
@@ -50,6 +51,7 @@ class MemoListVC: UITableViewController {
             self.present(vc!, animated: false)
             return
         }
+        self.appDelegate.memoList = self.dao.fetch()
         self.tableView.reloadData()
     }
     
