@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MemoData {
     var memoIdx : Int?
@@ -13,4 +14,6 @@ class MemoData {
     var contents : String?
     var image : UIImage?
     var regdate : Date?
+    
+    var objectID: NSManagedObjectID?
 }
