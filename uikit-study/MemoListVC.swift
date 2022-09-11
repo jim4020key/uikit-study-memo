@@ -7,9 +7,36 @@
 
 import UIKit
 
-class MemoListVC: UITableViewController {
+class MemoListVC: UITableViewController, UISearchBarDelegate {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     lazy var dao = MemoDAO()
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let ud = UserDefaults.standard
+        if ud.bool(forKey: UserInfoKey.tutorial) == false {
+            let vc = self.instanceTutorialVC(name: "MasterVC")
+            vc?.modalPresentationStyle = .automatic
+            self.present(vc!, animated: false)
+            return
+        }
+        self.appDelegate.memoList = self.dao.fetch()
+        self.tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        searchBar.enablesReturnKeyAutomatically = false
+        
+        if let revealVC = self.revealViewController() {
+            let button = UIBarButtonItem()
+            button.image = UIImage(named: "sidemenu.png")
+            button.target = revealVC
+            button.action = #selector(revealVC.revealToggle(_:))
+            self.navigationItem.leftBarButtonItem = button
+            
+            self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
+        }
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.appDelegate.memoList.count
@@ -56,27 +83,10 @@ class MemoListVC: UITableViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let ud = UserDefaults.standard
-        if ud.bool(forKey: UserInfoKey.tutorial) == false {
-            let vc = self.instanceTutorialVC(name: "MasterVC")
-            vc?.modalPresentationStyle = .automatic
-            self.present(vc!, animated: false)
-            return
-        }
-        self.appDelegate.memoList = self.dao.fetch()
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let keyword = searchBar.text
+        
+        self.appDelegate.memoList = self.dao.fetch(keyword: keyword)
         self.tableView.reloadData()
-    }
-    
-    override func viewDidLoad() {
-        if let revealVC = self.revealViewController() {
-            let button = UIBarButtonItem()
-            button.image = UIImage(named: "sidemenu.png")
-            button.target = revealVC
-            button.action = #selector(revealVC.revealToggle(_:))
-            self.navigationItem.leftBarButtonItem = button
-            
-            self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
-        }
     }
 }
