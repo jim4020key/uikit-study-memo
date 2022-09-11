@@ -43,6 +43,19 @@ class MemoListVC: UITableViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let data = self.appDelegate.memoList[indexPath.row]
+        
+        if dao.delete(data.objectID!) {
+            self.appDelegate.memoList.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         let ud = UserDefaults.standard
         if ud.bool(forKey: UserInfoKey.tutorial) == false {
