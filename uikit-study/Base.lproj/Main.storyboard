@@ -25,7 +25,7 @@
                             </connections>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="udr-cx-cmh">
-                            <rect key="frame" x="0.0" y="852.5" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="774.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RF-u0-Bbs" customClass="CSLogButton" customModule="uikit_study" customModuleProvider="target">
@@ -321,7 +321,7 @@
             </objects>
             <point key="canvasLocation" x="356.52173913043481" y="-60.267857142857139"/>
         </scene>
-        <!--ProfileVC-->
+        <!--프로필-->
         <scene sceneID="uIf-ed-RMO">
             <objects>
                 <viewController id="K2S-qm-MLu" customClass="ProfileVC" customModule="uikit_study" customModuleProvider="target" sceneMemberID="viewController">
@@ -331,11 +331,70 @@
                         <viewLayoutGuide key="safeArea" id="Wic-9A-TIW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uqE-Ia-Cap"/>
+                    <navigationItem key="navigationItem" title="프로필" id="uqE-Ia-Cap">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="GsA-ko-Rcq">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="4oK-qK-tfk">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="새 계정"/>
+                            </button>
+                            <connections>
+                                <segue destination="JHX-zg-EXj" kind="show" id="Pg5-15-935"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRF-K4-6rs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1186" y="650"/>
+        </scene>
+        <!--신규 계정 등록-->
+        <scene sceneID="rdT-ac-Rkv">
+            <objects>
+                <viewController id="JHX-zg-EXj" customClass="JoinVC" customModule="uikit_study" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LPQ-ae-mOz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="NYl-lE-ZsW">
+                                <rect key="frame" x="20" y="88" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gcj-jS-sUc">
+                                <rect key="frame" x="139" y="88" width="255" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="i9f-7y-cw6">
+                                        <rect key="frame" x="0.0" y="44.5" width="255" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i9f-7y-cw6" id="JI3-cf-5hB">
+                                            <rect key="frame" x="0.0" y="0.0" width="255" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="N2C-Mk-E5f"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="신규 계정 등록" id="kDs-EF-lge">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="QSn-LM-4AX">
+                            <connections>
+                                <action selector="submit:" destination="JHX-zg-EXj" id="9dM-At-cd2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="profile" destination="NYl-lE-ZsW" id="8Mz-EQ-dr6"/>
+                        <outlet property="tableView" destination="gcj-jS-sUc" id="0eV-FZ-agx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rdu-U8-QWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1971" y="650"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="fSj-B0-t11">
@@ -392,6 +451,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="account" width="90" height="90"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
