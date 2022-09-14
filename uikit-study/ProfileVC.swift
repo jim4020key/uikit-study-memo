@@ -198,4 +198,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         })
         self.present(alert, animated: false)
     }
+    
+    @IBAction func backProfileVC(_ seg: UIStoryboardSegue) {
+    }
 }

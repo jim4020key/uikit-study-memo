@@ -50,7 +50,9 @@ class JoinVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UINa
             
             let resultCode = jsonObject["result_code"] as! Int
             if resultCode == 0 {
-                self.alert("가입이 완료되었습니다")
+                self.alert("가입이 완료되었습니다") {
+                    self.performSegue(withIdentifier: "backProfileVC", sender: self)
+                }
             } else {
                 self.isCalling = false
                 let errorMessage = jsonObject["error_msg"] as! String

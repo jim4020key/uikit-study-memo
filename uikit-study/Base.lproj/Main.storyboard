@@ -396,9 +396,11 @@
                         <outlet property="indicatorView" destination="PL7-l6-XnE" id="qbp-TV-Ara"/>
                         <outlet property="profile" destination="NYl-lE-ZsW" id="8Mz-EQ-dr6"/>
                         <outlet property="tableView" destination="gcj-jS-sUc" id="0eV-FZ-agx"/>
+                        <segue destination="lXE-wN-ifx" kind="unwind" identifier="backProfileVC" unwindAction="backProfileVC:" id="aHF-xT-adF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rdu-U8-QWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="lXE-wN-ifx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1971" y="650"/>
         </scene>
