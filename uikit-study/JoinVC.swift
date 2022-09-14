@@ -9,15 +9,55 @@ import UIKit
 import Alamofire
 
 class JoinVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    @IBOutlet weak var profile: UIImageView!
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBAction func submit(_ sender: Any) {
-    }
-    
+    var isCalling = false
     var fieldAccount: UITextField!
     var fieldPassword: UITextField!
     var fieldName: UITextField!
+    
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    
+    @IBAction func submit(_ sender: Any) {
+        if self.isCalling == true {
+            self.alert("진행 중입니다. 잠시만 기다려주세요.")
+            return
+        } else {
+            self.isCalling = true
+        }
+        
+        self.indicatorView.startAnimating()
+        
+        let profile = self.profile.image!.pngData()?.base64EncodedString()
+        let param: Parameters = [
+            "account": self.fieldAccount.text!,
+            "passwd": self.fieldPassword.text!,
+            "name": self.fieldName.text!,
+            "profile_image": profile!
+        ]
+        
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/join"
+        let call = AF.request(url, method: HTTPMethod.post, parameters: param, encoding: JSONEncoding.default)
+        
+        call.responseJSON { res in
+            self.indicatorView.stopAnimating()
+            
+            guard let jsonObject = try! res.result.get() as? [String: Any] else {
+                self.isCalling = false
+                self.alert("서버 호출 과정에서 오류가 발생했습니다")
+                return
+            }
+            
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode == 0 {
+                self.alert("가입이 완료되었습니다")
+            } else {
+                self.isCalling = false
+                let errorMessage = jsonObject["error_msg"] as! String
+                self.alert("오류발생 : \(errorMessage)")
+            }
+        }
+    }
     
     override func viewDidLoad() {
         self.tableView.dataSource = self
@@ -28,6 +68,7 @@ class JoinVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UINa
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tappedProfile(_:)))
         self.profile.addGestureRecognizer(gesture)
+        self.view.bringSubviewToFront(self.indicatorView)
     }
     
     @objc func tappedProfile(_ sender: Any) {
