@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 struct UserInfoKey {
     static let loginId = "LOGINID"
@@ -75,16 +76,39 @@ class UserInfoManager {
         }
     }
     
-    func login(account: String, password: String) -> Bool {
-        if account.isEqual("abc@random.com") && password.isEqual("1234") {
-            let ud = UserDefaults.standard
-            ud.set(100, forKey: UserInfoKey.loginId)
-            ud.set(account, forKey: UserInfoKey.account)
-            ud.set("JIMIN", forKey: UserInfoKey.name)
-            ud.synchronize()
-            return true
-        } else {
-            return false
+    func login(account: String, password: String, success: (()->Void)? = nil, fail: ((String)->Void)? = nil) {
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/login"
+        let param: Parameters = [
+            "account": account,
+            "passwd" : password
+        ]
+        
+        let call = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default)
+        call.responseJSON { res in
+            let result = try! res.result.get()
+            guard let jsonObject = result as? NSDictionary else {
+                fail?("잘못된 응답 형식입니다:\(result)")
+                return
+            }
+            
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode == 0 {
+                let user = jsonObject["user_info"] as! NSDictionary
+                
+                self.loginId = user["user_id"] as! Int
+                self.account = user["account"] as? String
+                self.name = user["name"] as? String
+                
+                if let path = user["profile_path"] as? String {
+                    if let imageData = try? Data(contentsOf: URL(string: path)!) {
+                        self.profile = UIImage(data: imageData)
+                    }
+                }
+                success?()
+            } else {
+                let message = (jsonObject["error_msg"] as? String) ?? "로그인이 실패했습니다"
+                fail?(message)
+            }
         }
     }
     

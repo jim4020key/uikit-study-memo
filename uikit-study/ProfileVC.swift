@@ -170,16 +170,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             let account = loginAlert.textFields?[0].text ?? ""
             let password = loginAlert.textFields?[1].text ?? ""
             
-            if self.userInfo.login(account: account, password: password) {
+            self.userInfo.login(account: account, password: password, success: {
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()
-            } else {
-                let message = "로그인에 실패하였습니다."
-                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-                self.present(alert, animated: false)
-            }
+            }, fail: { message in
+                self.alert(message)
+            })
         })
         self.present(loginAlert, animated: false)
     }
