@@ -104,6 +104,13 @@ class UserInfoManager {
                         self.profile = UIImage(data: imageData)
                     }
                 }
+                
+                let accessToken = jsonObject["access_token"] as! String
+                let refreshToken = jsonObject["refresh_token"] as! String
+                let tk = TokenUtils()
+                tk.save("kr.co.rubypaper.MyMemory", account: "accessToken", value: accessToken)
+                tk.save("kr.co.rubypaper.MyMemory", account: "refreshToken", value: refreshToken)
+                
                 success?()
             } else {
                 let message = (jsonObject["error_msg"] as? String) ?? "로그인이 실패했습니다"
