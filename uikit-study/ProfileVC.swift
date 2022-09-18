@@ -11,6 +11,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     let userInfo = UserInfoManager()
     let profileImage = UIImageView()
     let tableView = UITableView()
+    var isCalling = false
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +52,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         self.view.bringSubviewToFront(self.profileImage)
         
         self.drawButton()
+        self.view.bringSubviewToFront(self.indicatorView)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -157,6 +160,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     
     @objc func doLogin(_ sender: Any) {
+        if self.isCalling == true {
+            self.alert("응답을 기다리는 중입니다\n잠시만 기다려 주세요")
+            return
+        } else {
+            self.isCalling = true
+        }
+        
         let loginAlert = UIAlertController(title: "LOGIN", message: nil, preferredStyle: .alert)
         loginAlert.addTextField() { (tf) in
             tf.placeholder = "Your Account"
@@ -165,16 +175,24 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             tf.placeholder = "Password"
             tf.isSecureTextEntry = true
         }
-        loginAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        loginAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            self.isCalling = false
+        })
         loginAlert.addAction(UIAlertAction(title: "Login", style: .destructive) { (_) in
+            self.indicatorView.startAnimating()
+            self.isCalling = false
+            
             let account = loginAlert.textFields?[0].text ?? ""
             let password = loginAlert.textFields?[1].text ?? ""
             
             self.userInfo.login(account: account, password: password, success: {
+                self.indicatorView.stopAnimating()
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()
             }, fail: { message in
+                self.indicatorView.stopAnimating()
+                self.isCalling = false
                 self.alert(message)
             })
         })
