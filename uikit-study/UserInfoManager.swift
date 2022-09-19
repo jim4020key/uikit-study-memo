@@ -144,4 +144,31 @@ class UserInfoManager {
         tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "refreshToken")
         tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "accessToken")
     }
+    
+    func newProfile(_ profile: UIImage?, success: (()->Void)? = nil, fail: ((String)->Void)? = nil) {
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/profile"
+        
+        let tk = TokenUtils()
+        let header = tk.getAuthorizationHeader()
+        
+        let profileData = profile!.pngData()?.base64EncodedString()
+        let param: Parameters = ["profile_image":profileData!]
+        
+        let call = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header)
+        call.responseJSON { res in
+            guard let jsonObject = try! res.result.get() as? NSDictionary else {
+                fail?("올바른 응답값이 아닙니다")
+                return
+            }
+            
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode == 0 {
+                self.profile = profile
+                success?()
+            } else {
+                let message = (jsonObject["error_msg"] as? String) ?? "이미지 프로필 변경이 실패했습니다"
+                fail?(message)
+            }
+        }
+    }
 }

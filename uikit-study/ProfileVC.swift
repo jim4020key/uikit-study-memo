@@ -56,9 +56,16 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        self.indicatorView.startAnimating()
+        
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            self.userInfo.profile = image
-            self.profileImage.image = image
+            self.userInfo.newProfile(image, success: {
+                self.indicatorView.stopAnimating()
+                self.profileImage.image = image
+            }, fail: { msg in
+                self.indicatorView.stopAnimating()
+                self.alert(msg)
+            })
         }
         picker.dismiss(animated: true)
     }
@@ -190,6 +197,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()
+                self.view.bringSubviewToFront(self.indicatorView)
             }, fail: { message in
                 self.indicatorView.stopAnimating()
                 self.isCalling = false
@@ -212,6 +220,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()
+                self.view.bringSubviewToFront(self.indicatorView)
             }
         })
         self.present(alert, animated: false)
