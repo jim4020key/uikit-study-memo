@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import LocalAuthentication
 
 class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let userInfo = UserInfoManager()
@@ -52,7 +54,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         self.view.bringSubviewToFront(self.profileImage)
         
         self.drawButton()
-        self.view.bringSubviewToFront(self.indicatorView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tokenValidate()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -131,6 +136,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             button.addTarget(self, action: #selector(doLogin(_:)), for: .touchUpInside)
         }
         view.addSubview(button)
+        self.view.bringSubviewToFront(self.indicatorView)
     }
     
     @objc func profile(_ sender: UIButton) {
@@ -197,7 +203,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()
-                self.view.bringSubviewToFront(self.indicatorView)
             }, fail: { message in
                 self.indicatorView.stopAnimating()
                 self.isCalling = false
@@ -220,12 +225,129 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()
-                self.view.bringSubviewToFront(self.indicatorView)
             }
         })
         self.present(alert, animated: false)
     }
     
     @IBAction func backProfileVC(_ seg: UIStoryboardSegue) {
+    }
+}
+
+extension ProfileVC {
+    func tokenValidate() {
+        URLCache.shared.removeAllCachedResponses()
+        
+        let tk = TokenUtils()
+        guard let header = tk.getAuthorizationHeader() else { return }
+        
+        self.indicatorView.startAnimating()
+        
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/tokenValidate"
+        let validate = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: header)
+        validate.responseJSON { res in
+            self.indicatorView.stopAnimating()
+            
+            let responseBody = try! res.result.get()
+            print(responseBody)
+            guard let jsonObject = responseBody as? NSDictionary else {
+                self.alert("잘못된 응답입니다")
+                return
+            }
+            
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode != 0 {
+                self.touchID()
+            }
+        }
+    }
+    
+    func touchID() {
+        let context = LAContext()
+        var error: NSError?
+        let message = "인증이 필요합니다"
+        let deviceAuth = LAPolicy.deviceOwnerAuthenticationWithBiometrics
+        
+        if context.canEvaluatePolicy(deviceAuth, error: &error) {
+            context.evaluatePolicy(deviceAuth, localizedReason: message) { (success, error) in
+                if success {
+                    self.refresh()
+                } else {
+                    print((error?.localizedDescription)!)
+                    switch (error!._code) {
+                    case LAError.systemCancel.rawValue:
+                        self.alert("시스템에 의해 인증이 취소되었습니다")
+                    case LAError.userCancel.rawValue:
+                        self.alert("사용자에 의해 인증이 취소되었습니다") {
+                            self.commonLogout(true)
+                        }
+                    case LAError.userFallback.rawValue:
+                        OperationQueue.main.addOperation() {
+                            self.commonLogout(true)
+                        }
+                    default:
+                        OperationQueue.main.addOperation() {
+                            self.commonLogout(true)
+                        }
+                    }
+                }
+            }
+        } else {
+            print(error!.localizedDescription)
+            switch (error!.code) {
+            case LAError.biometryNotEnrolled.rawValue:
+                print("터치 아이디가 등록되어 있지 않습니다")
+            case LAError.passcodeNotSet.rawValue:
+                print("패스 코드가 설정되어 있지 않습니다")
+            default:
+                print("터치 아이디를 사용할 수 없습니다")
+            }
+        }
+    }
+    
+    func refresh() {
+        self.indicatorView.startAnimating()
+        
+        let tk = TokenUtils()
+        let header = tk.getAuthorizationHeader()
+        
+        let refreshToken = tk.load("kr.co.rubypaper.MyMemory", account: "refreshToken")
+        let param: Parameters = ["refresh_token": refreshToken!]
+        
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/refresh"
+        let refresh = AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header)
+        refresh.responseJSON { res in
+            self.indicatorView.stopAnimating()
+            
+            guard let jsonObject = try! res.result.get() as? NSDictionary else {
+                self.alert("잘못된 응답입니다")
+                return
+            }
+            
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode == 0 {
+                let accessToken = jsonObject["access_token"] as! String
+                tk.save("kr.co.rubypaper.MyMemory", account: "accessToken", value: accessToken)
+            } else {
+                self.alert("인증이 만료되었으므로 다시 로그인해야 합니다") {
+                    OperationQueue.main.addOperation() {
+                        self.commonLogout(true)
+                    }
+                }
+            }
+        }
+    }
+    
+    func commonLogout(_ isLogin: Bool = false) {
+        let userInfo = UserInfoManager()
+        userInfo.deviceLogout()
+        
+        self.tableView.reloadData()
+        self.profileImage.image = userInfo.profile
+        self.drawButton()
+        
+        if isLogin {
+            self.doLogin(self)
+        }
     }
 }
