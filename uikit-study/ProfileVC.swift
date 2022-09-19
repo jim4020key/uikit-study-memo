@@ -205,7 +205,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         
         alert.addAction(UIAlertAction(title: "취소", style: .cancel))
         alert.addAction(UIAlertAction(title: "확인", style: .destructive) { (_) in
-            if self.userInfo.logout() {
+            self.indicatorView.startAnimating()
+            
+            self.userInfo.logout() {
+                self.indicatorView.stopAnimating()
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()

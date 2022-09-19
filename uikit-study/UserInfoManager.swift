@@ -119,13 +119,29 @@ class UserInfoManager {
         }
     }
     
-    func logout() -> Bool {
+    func logout(completion: (()->Void)? = nil) {
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/logout"
+        
+        let tokenUtils = TokenUtils()
+        let header = tokenUtils.getAuthorizationHeader()
+        
+        let call = AF.request(url, method: .post, encoding: JSONEncoding.default, headers: header)
+        call.responseJSON { _ in
+            self.deviceLogout()
+            completion?()
+        }
+    }
+    
+    func deviceLogout() {
         let ud = UserDefaults.standard
         ud.removeObject(forKey: UserInfoKey.loginId)
         ud.removeObject(forKey: UserInfoKey.account)
         ud.removeObject(forKey: UserInfoKey.name)
         ud.removeObject(forKey: UserInfoKey.profile)
         ud.synchronize()
-        return true
+        
+        let tokenUtils = TokenUtils()
+        tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "refreshToken")
+        tokenUtils.delete("kr.co.rubypaper.MyMemory", account: "accessToken")
     }
 }
