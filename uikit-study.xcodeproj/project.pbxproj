@@ -19,6 +19,7 @@
 		4D397AC02871E43F008983C1 /* uikit_study.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D397ABE2871E43F008983C1 /* uikit_study.xcdatamodeld */; };
 		4D397AC22871E441008983C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D397AC12871E441008983C1 /* Assets.xcassets */; };
 		4D397AC52871E441008983C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D397AC32871E441008983C1 /* LaunchScreen.storyboard */; };
+		4D5DDEBE28DCABA900C99278 /* DataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5DDEBD28DCABA900C99278 /* DataSync.swift */; };
 		4D643B9F28B6908C00FDF7A5 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D643B9E28B6908C00FDF7A5 /* UserInfoManager.swift */; };
 		4D77D84528CE44FE0083F9A9 /* MemoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77D84428CE44FE0083F9A9 /* MemoDAO.swift */; };
 		4D8168C228D10291003B34FB /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8168C128D10291003B34FB /* JoinVC.swift */; };
@@ -59,6 +60,7 @@
 		4D397AC12871E441008983C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D397AC42871E441008983C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D397AC62871E441008983C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D5DDEBD28DCABA900C99278 /* DataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSync.swift; sourceTree = "<group>"; };
 		4D643B9E28B6908C00FDF7A5 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		4D77D84428CE44FE0083F9A9 /* MemoDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDAO.swift; sourceTree = "<group>"; };
 		4D8168C128D10291003B34FB /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				4DCC153E28B915B60057C562 /* Utils.swift */,
 				4D77D84428CE44FE0083F9A9 /* MemoDAO.swift */,
 				4D8168C128D10291003B34FB /* JoinVC.swift */,
+				4D5DDEBD28DCABA900C99278 /* DataSync.swift */,
 				4DCC154228B916D20057C562 /* Tutorial */,
 				4D966F9328B28DFB00A435CD /* Bridging-Header.h */,
 			);
@@ -325,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D966F9728B2941700A435CD /* ProfileVC.swift in Sources */,
+				4D5DDEBE28DCABA900C99278 /* DataSync.swift in Sources */,
 				4DCD4BFA28AD4C9400FBAD01 /* CSLogButton.swift in Sources */,
 				4D966F9528B28F5400A435CD /* SideBarVC.swift in Sources */,
 				4DCC153F28B915B60057C562 /* Utils.swift in Sources */,

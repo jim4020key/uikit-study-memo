@@ -203,6 +203,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 self.tableView.reloadData()
                 self.profileImage.image = self.userInfo.profile
                 self.drawButton()
+                
+                let sync = DataSync()
+                DispatchQueue.global(qos: .background).async {
+                    sync.downloadBackupData()
+                }
             }, fail: { message in
                 self.indicatorView.stopAnimating()
                 self.isCalling = false
