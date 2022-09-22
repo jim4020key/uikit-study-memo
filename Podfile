@@ -7,5 +7,5 @@ target 'uikit-study' do
 
   # Pods for uikit-study
   pod 'Alamofire', '~> 5.2'
-
+  pod 'SnapKit', '~> 5.6.0'
 end
