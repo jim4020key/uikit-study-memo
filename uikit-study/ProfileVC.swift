@@ -208,6 +208,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 DispatchQueue.global(qos: .background).async {
                     sync.downloadBackupData()
                 }
+                DispatchQueue.global(qos: .background).async {
+                    sync.uploadData()
+                }
             }, fail: { message in
                 self.indicatorView.stopAnimating()
                 self.isCalling = false

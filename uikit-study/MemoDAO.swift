@@ -56,6 +56,14 @@ class MemoDAO {
         
         do {
             try self.context.save()
+            
+            let tk = TokenUtils()
+            if tk.getAuthorizationHeader() != nil {
+                DispatchQueue.global(qos: .background).async {
+                    let sync = DataSync()
+                    sync.uploadDatum(object)
+                }
+            }
         } catch let error as NSError {
             NSLog("An error has occured: %s", error.localizedDescription)
         }
